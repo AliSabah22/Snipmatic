@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import GlassmorphicPanels from '../components/3d/GlassmorphicPanels';
 import AnimatedText from '../components/animations/AnimatedText';
 import HoverPop from '../components/animations/HoverPop';
+import ThemeToggle from '../components/ThemeToggle';
 
 // Dynamically import VideoCarousel with no SSR and loading state
 // const VideoCarousel = dynamic(() => import('../components/3d/VideoCarousel'), {
@@ -23,19 +24,20 @@ import HoverPop from '../components/animations/HoverPop';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-950/30 via-pink-950/30 to-emerald-950/30 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-emerald-950/30 via-pink-950/30 to-emerald-950/30 dark:from-emerald-950 dark:via-pink-950 dark:to-emerald-950 text-white">
       {/* Navigation */}
-      <nav className="container mx-auto px-6 py-4 backdrop-blur-sm bg-black/20 fixed top-0 left-0 right-0 z-50">
+      <nav className="container mx-auto px-6 py-4 backdrop-blur-sm bg-black/20 dark:bg-black/40 fixed top-0 left-0 right-0 z-50">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center">
             <HoverPop>
               <AnimatedText
                 text="Snipmatic.AI"
-                className="text-2xl font-bold bg-gradient-to-r from-amber-50 via-pink-200 to-emerald-200 bg-clip-text text-transparent"
+                className="text-2xl font-bold bg-gradient-to-r from-amber-50 via-pink-200 to-emerald-200 dark:from-amber-100 dark:via-pink-300 dark:to-emerald-300 bg-clip-text text-transparent"
               />
             </HoverPop>
           </div>
           <div className="flex items-center space-x-8">
+            <ThemeToggle />
             <HoverPop>
               <Link href="/login" className="text-amber-100 hover:text-white transition-colors duration-300">
                 Login
@@ -44,7 +46,7 @@ export default function LandingPage() {
             <HoverPop>
               <Link 
                 href="/signup" 
-                className="bg-gradient-to-r from-amber-200 to-pink-300 hover:from-amber-300 hover:to-pink-400 text-emerald-950 px-6 py-2 rounded-full transition-all duration-300 shadow-lg hover:shadow-pink-500/25"
+                className="bg-gradient-to-r from-amber-200 to-pink-300 hover:from-amber-300 hover:to-pink-400 dark:from-amber-300 dark:to-pink-400 dark:hover:from-amber-400 dark:hover:to-pink-500 text-emerald-950 px-6 py-2 rounded-full transition-all duration-300 shadow-lg hover:shadow-pink-500/25"
               >
                 Sign Up
               </Link>
@@ -58,7 +60,7 @@ export default function LandingPage() {
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           <div className="relative mb-12 w-full">
             <div className="absolute -inset-1 bg-gradient-to-r from-amber-50 via-pink-200 to-emerald-200 rounded-lg blur opacity-25"></div>
-            <div className="relative bg-black/20 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20">
+            <div className="relative bg-black/20 dark:bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20 dark:border-amber-500/30">
               <HoverPop>
                 <AnimatedText
                   text="Transform Your Videos into Viral Clips"
@@ -132,7 +134,7 @@ export default function LandingPage() {
               <HoverPop key={index}>
                 <div className="group relative h-[280px]">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-50 via-pink-200 to-emerald-200 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
-                  <div className="relative bg-black/20 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20 h-full flex flex-col transition-all duration-300 group-hover:border-amber-500/30 group-hover:shadow-lg group-hover:shadow-amber-500/10">
+                  <div className="relative bg-black/20 dark:bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20 dark:border-amber-500/30 h-full flex flex-col transition-all duration-300 group-hover:border-amber-500/30 group-hover:shadow-lg group-hover:shadow-amber-500/10">
                     <div className={`text-transparent bg-gradient-to-r ${benefit.gradient} bg-clip-text mb-6`}>
                       {benefit.icon}
                     </div>
@@ -150,7 +152,7 @@ export default function LandingPage() {
           <div className="mt-24 text-center w-full max-w-4xl mx-auto">
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-amber-50 via-pink-200 to-emerald-200 rounded-lg blur opacity-25"></div>
-              <div className="relative bg-black/20 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20">
+              <div className="relative bg-black/20 dark:bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20 dark:border-amber-500/30">
                 <p className="text-amber-200 mb-10 text-lg">Trusted by content creators worldwide</p>
                 <div className="flex flex-wrap justify-center items-center gap-12 opacity-75">
                   {['YouTube', 'TikTok', 'Instagram', 'LinkedIn'].map((platform) => (
@@ -172,7 +174,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto">
           <div className="relative mb-16">
             <div className="absolute -inset-1 bg-gradient-to-r from-amber-50 via-pink-200 to-emerald-200 rounded-lg blur opacity-25"></div>
-            <div className="relative bg-black/20 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20">
+            <div className="relative bg-black/20 dark:bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20 dark:border-amber-500/30">
               <HoverPop>
                 <AnimatedText
                   text="Why Choose Snipmatic.AI?"
@@ -219,7 +221,7 @@ export default function LandingPage() {
               <HoverPop key={index}>
                 <div className="group relative h-[280px]">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-50 via-pink-200 to-emerald-200 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
-                  <div className="relative bg-black/20 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20 h-full flex flex-col transition-all duration-300 group-hover:border-amber-500/30 group-hover:shadow-lg group-hover:shadow-amber-500/10">
+                  <div className="relative bg-black/20 dark:bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20 dark:border-amber-500/30 h-full flex flex-col transition-all duration-300 group-hover:border-amber-500/30 group-hover:shadow-lg group-hover:shadow-amber-500/10">
                     <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-gradient-to-r ${feature.gradient}`}>
                       {feature.icon}
                     </div>
@@ -240,7 +242,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto">
           <div className="relative mb-16">
             <div className="absolute -inset-1 bg-gradient-to-r from-amber-50 via-pink-200 to-emerald-200 rounded-lg blur opacity-25"></div>
-            <div className="relative bg-black/20 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20">
+            <div className="relative bg-black/20 dark:bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20 dark:border-amber-500/30">
               <HoverPop>
                 <AnimatedText
                   text="Advanced Features"
@@ -289,7 +291,7 @@ export default function LandingPage() {
               <HoverPop key={index}>
                 <div className="group relative h-[280px]">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-50 via-pink-200 to-emerald-200 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
-                  <div className="relative bg-black/20 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20 h-full transition-all duration-300 group-hover:border-amber-500/30 group-hover:shadow-lg group-hover:shadow-amber-500/10">
+                  <div className="relative bg-black/20 dark:bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20 dark:border-amber-500/30 h-full transition-all duration-300 group-hover:border-amber-500/30 group-hover:shadow-lg group-hover:shadow-amber-500/10">
                     <div className="flex items-start space-x-4">
                       <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-to-r ${feature.gradient}`}>
                         {feature.icon}
@@ -321,7 +323,7 @@ export default function LandingPage() {
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-amber-50 via-pink-200 to-emerald-200 rounded-2xl blur opacity-25"></div>
               <div className="relative bg-gradient-to-r from-amber-200 via-pink-300 to-emerald-300 rounded-2xl p-12 text-center overflow-hidden">
-                <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
+                <div className="absolute inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm"></div>
                 <div className="relative z-10">
                   <AnimatedText
                     text="Ready to Transform Your Content?"
