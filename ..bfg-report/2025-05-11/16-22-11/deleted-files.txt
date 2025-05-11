@@ -1,0 +1,2 @@
+b2c27ee5a4de8f4583b3c099d1deb166330516e0 106113416 next-swc.darwin-arm64.node
+b7dfe7548198b05aefee50e2aa00d244208c1009 2276624 resolver.darwin-arm64.node

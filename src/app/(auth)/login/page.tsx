@@ -1,110 +1,119 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import HoverPop from '../../../components/animations/HoverPop';
+import AnimatedText from '../../../components/animations/AnimatedText';
 
-const supabaseUrl = 'https://oqkhxwpkrxecidrfmoyb.supabase.co';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+export default function LoginPage() {
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-if (!supabaseAnonKey) {
-  throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable');
-}
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
-export default async function LoginPage() {
-  console.log('Login Page - Starting to render');
-  
-  try {
-    const supabase = createServerComponentClient({
-      cookies,
-      supabaseUrl,
-      supabaseKey: supabaseAnonKey,
-    });
-    console.log('Login Page - Supabase client created');
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
 
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    console.log('Login Page - Session check completed:', !!session);
+    try {
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      });
 
-    if (session) {
-      console.log('Login Page - Redirecting to dashboard');
-      redirect('/dashboard');
+      if (result?.error) {
+        setError('Invalid email or password');
+        return;
+      }
+
+      router.push('/dashboard');
+      router.refresh();
+    } catch (error) {
+      setError('Something went wrong');
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    return (
-      <div className="flex min-h-screen flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Sign in to your account
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or{' '}
-            <Link
-              href="/signup"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              create a new account
-            </Link>
-          </p>
-        </div>
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-emerald-950/30 via-pink-950/30 to-emerald-950/30 dark:from-emerald-950 dark:via-pink-950 dark:to-emerald-950 text-white flex items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        <div className="relative">
+          <div className="absolute -inset-1 bg-gradient-to-r from-amber-50 via-pink-200 to-emerald-200 rounded-lg blur opacity-25"></div>
+          <div className="relative bg-black/20 dark:bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-amber-500/20 dark:border-amber-500/30">
+            <div className="text-center mb-8">
+              <HoverPop>
+                <AnimatedText
+                  text="Welcome Back"
+                  className="text-3xl font-bold bg-gradient-to-r from-amber-50 via-pink-200 to-emerald-200 dark:from-amber-100 dark:via-pink-300 dark:to-emerald-300 bg-clip-text text-transparent"
+                />
+              </HoverPop>
+            </div>
 
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" action="/api/auth/sign-in" method="POST">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Email address
+                <label htmlFor="email" className="block text-sm font-medium text-amber-100 mb-2">
+                  Email
                 </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  className="w-full px-4 py-2 bg-black/20 border border-amber-500/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-white placeholder-amber-100/50"
+                  placeholder="Enter your email"
+                />
               </div>
 
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
+                <label htmlFor="password" className="block text-sm font-medium text-amber-100 mb-2">
                   Password
                 </label>
-                <div className="mt-2">
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  className="w-full px-4 py-2 bg-black/20 border border-amber-500/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-white placeholder-amber-100/50"
+                  placeholder="Enter your password"
+                />
               </div>
 
-              <div>
+              {error && (
+                <div className="text-pink-400 text-sm text-center">
+                  {error}
+                </div>
+              )}
+
+              <HoverPop>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  disabled={isLoading}
+                  className="w-full bg-gradient-to-r from-amber-200 to-pink-300 hover:from-amber-300 hover:to-pink-400 dark:from-amber-300 dark:to-pink-400 dark:hover:from-amber-400 dark:hover:to-pink-500 text-emerald-950 px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-pink-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Sign in
+                  {isLoading ? 'Signing in...' : 'Sign In'}
                 </button>
-              </div>
+              </HoverPop>
             </form>
+
+            <div className="mt-6 text-center">
+              <p className="text-amber-100">
+                Don't have an account?{' '}
+                <Link href="/signup" className="text-pink-300 hover:text-pink-400 transition-colors duration-300">
+                  Sign up
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    );
-  } catch (error) {
-    console.error('Login Page - Error:', error);
-    throw error;
-  }
+    </div>
+  );
 } 
