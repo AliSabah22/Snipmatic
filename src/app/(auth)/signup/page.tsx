@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import HoverPop from '../../../components/animations/HoverPop';
 import AnimatedText from '../../../components/animations/AnimatedText';
@@ -22,6 +23,7 @@ export default function SignUpPage() {
     const password = formData.get('password') as string;
 
     try {
+      // First, register the user
       const response = await fetch('/api/register', {
         method: 'POST',
         headers: {
@@ -39,7 +41,21 @@ export default function SignUpPage() {
         throw new Error(data);
       }
 
-      router.push('/login');
+      // Then, sign in the user
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError('Registration successful but failed to sign in. Please try logging in.');
+        return;
+      }
+
+      // Finally, redirect to plans page
+      router.push('/plans');
+      router.refresh();
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

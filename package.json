@@ -14,12 +14,14 @@
     "@ffmpeg/core": "^0.12.6",
     "@ffmpeg/ffmpeg": "^0.12.10",
     "@ffmpeg/util": "^0.12.1",
+    "@headlessui/react": "^2.2.2",
+    "@heroicons/react": "^2.2.0",
     "@prisma/client": "^6.7.0",
     "@react-three/drei": "^9.80.1",
     "@react-three/fiber": "^8.13.6",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/auth-helpers-react": "^0.5.0",
-    "@supabase/supabase-js": "^2.39.3",
+    "@supabase/supabase-js": "^2.49.4",
     "@types/animejs": "^3.1.13",
     "@types/three": "^0.176.0",
     "animejs": "^4.0.2",
@@ -30,7 +32,6 @@
     "next": "14.1.0",
     "next-auth": "^4.24.11",
     "openai": "^4.28.0",
-    "prisma": "^6.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
@@ -44,7 +45,21 @@
     "eslint": "^8.56.0",
     "eslint-config-next": "14.1.0",
     "postcss": "^8.4.35",
+    "prisma": "^6.7.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
-  }
+  },
+  "description": "Transform long-form videos into viral short-form clips with AI.",
+  "main": "next.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AliSabah22/Snipmatic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AliSabah22/Snipmatic/issues"
+  },
+  "homepage": "https://github.com/AliSabah22/Snipmatic#readme"
 }

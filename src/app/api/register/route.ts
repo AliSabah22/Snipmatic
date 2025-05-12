@@ -33,9 +33,16 @@ export async function POST(request: Request) {
       }
     });
 
-    return NextResponse.json(user);
+    // Don't send the password back in the response
+    const { password: _, ...userWithoutPassword } = user;
+    return NextResponse.json(userWithoutPassword);
   } catch (error) {
-    console.log("[REGISTER_ERROR]", error);
+    console.error("[REGISTER_ERROR]", error);
+    if (error instanceof Error) {
+      return new NextResponse(error.message, { status: 500 });
+    }
     return new NextResponse("Internal Error", { status: 500 });
+  } finally {
+    await prisma.$disconnect();
   }
 } 
