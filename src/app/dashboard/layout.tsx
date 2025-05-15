@@ -29,12 +29,12 @@ export default function DashboardLayout({
   const pathname = usePathname();
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-neutral-100 dark:bg-gradient-to-b dark:from-emerald-950 dark:via-pink-950 dark:to-emerald-950">
       {/* Sidebar */}
-      <div className="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 shadow-lg">
+      <div className="fixed inset-y-0 left-0 w-64 bg-white dark:bg-black/20 dark:backdrop-blur-sm shadow-lg border-r border-neutral-200 dark:border-amber-500/30">
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="flex items-center justify-center h-16 border-b border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-center h-16 border-b border-neutral-200 dark:border-amber-500/30">
             <Link href="/dashboard" className="text-xl font-bold text-gray-800 dark:text-white">
               Snipmatic
             </Link>
@@ -50,11 +50,11 @@ export default function DashboardLayout({
                   href={item.href}
                   className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                     isActive
-                      ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'
-                      : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      ? 'bg-neutral-200 dark:bg-black/30 text-gray-900 dark:text-white'
+                      : 'text-gray-600 dark:text-amber-100 hover:bg-neutral-100 dark:hover:bg-black/30'
                   }`}
                 >
-                  <item.icon className="w-5 h-5 mr-3" />
+                  <item.icon className={`w-5 h-5 mr-3 ${isActive ? 'text-emerald-700 dark:text-amber-200' : 'text-gray-400 dark:text-amber-100/70 group-hover:text-gray-500 dark:group-hover:text-amber-100'}`} />
                   {item.name}
                 </Link>
               );
@@ -62,12 +62,12 @@ export default function DashboardLayout({
           </nav>
 
           {/* Logout Button */}
-          <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="p-4 border-t border-neutral-200 dark:border-amber-500/30">
             <button
               onClick={() => signOut()}
-              className="flex items-center w-full px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg"
+              className="flex items-center w-full px-4 py-2 text-sm font-medium text-gray-600 dark:text-amber-100 hover:bg-neutral-100 dark:hover:bg-black/30 rounded-lg group"
             >
-              <ArrowLeftOnRectangleIcon className="w-5 h-5 mr-3" />
+              <ArrowLeftOnRectangleIcon className="w-5 h-5 mr-3 text-gray-400 dark:text-amber-100/70 group-hover:text-gray-500 dark:group-hover:text-amber-100" />
               Sign Out
             </button>
           </div>
@@ -77,7 +77,7 @@ export default function DashboardLayout({
       {/* Main Content */}
       <div className="pl-64">
         {/* Header */}
-        <header className="sticky top-0 z-10 bg-white dark:bg-gray-800 shadow-sm">
+        <header className="sticky top-0 z-10 bg-white dark:bg-black/20 dark:backdrop-blur-sm shadow-sm border-b border-neutral-200 dark:border-amber-500/30">
           <div className="flex items-center justify-between h-16 px-8">
             <h1 className="text-xl font-semibold text-gray-800 dark:text-white">
               {navigation.find(item => item.href === pathname)?.name || 'Dashboard'}
