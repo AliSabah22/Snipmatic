@@ -61,9 +61,9 @@ src/
 Create a `.env.local` file with the following variables:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-OPENAI_API_KEY=your_openai_api_key
+NEXT_PUBLIC_SUPABASE_URL=https://oqkhxwpkrxecidrfmoyb.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xa2h4d3BrcnhlY2lkcmZtb3liIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5ODkyMzksImV4cCI6MjA2MjU2NTIzOX0.Hek_meFa2_d0ftx3mT2dUihHu4Mi3vYutTB6YdG_i7w
+OPENAI_API_KEY=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
 ```
 
 ## Features

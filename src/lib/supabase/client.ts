@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = 'https://oqkhxwpkrxecidrfmoyb.supabase.co';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xa2h4d3BrcnhlY2lkcmZtb3liIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5ODkyMzksImV4cCI6MjA2MjU2NTIzOX0.Hek_meFa2_d0ftx3mT2dUihHu4Mi3vYutTB6YdG_i7w;'
 
 if (!supabaseAnonKey) {
   throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable');

@@ -5,7 +5,23 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
+
+// TEMPORARY DIAGNOSTIC: Hardcode DATABASE_URL for NextAuth
+const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: "postgresql://postgres:postgres@localhost:5432/Snipmatic", 
+    },
+  },
+  // Optional: you can add logging here too if needed for NextAuth routes
+  // log: [
+  //   { emit: 'stdout', level: 'query' },
+  //   { emit: 'stdout', level: 'info' },
+  //   { emit: 'stdout', level: 'warn' },
+  //   { emit: 'stdout', level: 'error' },
+  // ],
+});
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -64,6 +80,13 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async jwt({ token, user }) {
+      if (!token.email) {
+        if (user) {
+          token.id = user?.id;
+        }
+        return token;
+      }
+
       const dbUser = await prisma.user.findFirst({
         where: {
           email: token.email,
